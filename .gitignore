@@ -1,0 +1,14 @@
+## .NET Core
+bin/
+obj/
+.vs/
+*.user
+*.userosscache
+*.suo
+*.dbmdl
+*.jfm
+*.pfx
+*.publishsettings
+
+## Local development settings
+appsettings.Development.json 
