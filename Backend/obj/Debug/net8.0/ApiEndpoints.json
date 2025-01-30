@@ -1,0 +1,650 @@
+[
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.DoctorController",
+    "Method": "GetAllDoctors",
+    "RelativePath": "api/Doctor",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.DoctorController",
+    "Method": "CreateDoctor",
+    "RelativePath": "api/Doctor",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "doctor",
+        "Type": "Prescription_and_Doctor_Visit_Management_System.Models.Doctor",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.DoctorController",
+    "Method": "EditDoctor",
+    "RelativePath": "api/Doctor/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedDoctor",
+        "Type": "Prescription_and_Doctor_Visit_Management_System.Models.Doctor",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.DoctorController",
+    "Method": "DeleteDoctor",
+    "RelativePath": "api/Doctor/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.DoctorController",
+    "Method": "Login",
+    "RelativePath": "api/Doctor/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Prescription_and_Doctor_Visit_Management_System.Controllers.DoctorLoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.MedicinesController",
+    "Method": "GetAllMedicines",
+    "RelativePath": "api/Medicines",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.MedicinesController",
+    "Method": "CreateMedicine",
+    "RelativePath": "api/Medicines",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newMedicine",
+        "Type": "Prescription_and_Doctor_Visit_Management_System.Models.Medicine",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.MedicinesController",
+    "Method": "GetMedicineByName",
+    "RelativePath": "api/Medicines/{name}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.MedicinesController",
+    "Method": "DeleteMedicine",
+    "RelativePath": "api/Medicines/{name}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.MedicinesController",
+    "Method": "AddMedicinesToQueue",
+    "RelativePath": "api/Medicines/queue",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "medicineNames",
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.MedicinesController",
+    "Method": "SearchMedicinesByPrice",
+    "RelativePath": "api/Medicines/search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "minPrice",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "maxPrice",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.MedicinesController",
+    "Method": "SearchMedicinesByPartialName",
+    "RelativePath": "api/Medicines/search/partial",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "partialName",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.NewPrescriptionDetailsController",
+    "Method": "CreateNewPrescriptionDetail",
+    "RelativePath": "api/NewPrescriptionDetails",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newPrescriptionDetail",
+        "Type": "Prescription_and_Doctor_Visit_Management_System.Models.NewPrescriptionDetail",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.NewPrescriptionDetailsController",
+    "Method": "DeletePrescriptionDetail",
+    "RelativePath": "api/NewPrescriptionDetails/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.NewPrescriptionDetailsController",
+    "Method": "GetDetailsByPrescriptionId",
+    "RelativePath": "api/NewPrescriptionDetails/{newPrescriptionID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newPrescriptionID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.NewPrescriptionsController",
+    "Method": "CreateNewPrescription",
+    "RelativePath": "api/NewPrescriptions",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newPrescriptionRequest",
+        "Type": "Prescription_and_Doctor_Visit_Management_System.Controllers.NewPrescriptionRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.NewPrescriptionsController",
+    "Method": "GetNewPrescriptionById",
+    "RelativePath": "api/NewPrescriptions/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.NewPrescriptionsController",
+    "Method": "GetPrescriptionsByPatientId",
+    "RelativePath": "api/NewPrescriptions/byPatient/{patientId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "patientId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.PatientController",
+    "Method": "GetAllPatients",
+    "RelativePath": "api/Patient",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.PatientController",
+    "Method": "CreatePatient",
+    "RelativePath": "api/Patient",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "patient",
+        "Type": "Prescription_and_Doctor_Visit_Management_System.Models.Patient",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.PatientController",
+    "Method": "EditPatient",
+    "RelativePath": "api/Patient/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedPatient",
+        "Type": "Prescription_and_Doctor_Visit_Management_System.Models.Patient",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.PatientController",
+    "Method": "DeletePatient",
+    "RelativePath": "api/Patient/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.PharmacyController",
+    "Method": "GetAllPharmacies",
+    "RelativePath": "api/Pharmacy",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.PharmacyController",
+    "Method": "CreatePharmacy",
+    "RelativePath": "api/Pharmacy",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pharmacy",
+        "Type": "Prescription_and_Doctor_Visit_Management_System.Models.Pharmacy",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.PharmacyController",
+    "Method": "EditPharmacy",
+    "RelativePath": "api/Pharmacy/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedPharmacy",
+        "Type": "Prescription_and_Doctor_Visit_Management_System.Models.Pharmacy",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.PharmacyController",
+    "Method": "DeletePharmacy",
+    "RelativePath": "api/Pharmacy/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.PharmacyController",
+    "Method": "Login",
+    "RelativePath": "api/Pharmacy/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Prescription_and_Doctor_Visit_Management_System.Controllers.PharmacyLoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.PrescriptionController",
+    "Method": "GetAllPrescriptions",
+    "RelativePath": "api/Prescription",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.PrescriptionController",
+    "Method": "CreatePrescription",
+    "RelativePath": "api/Prescription",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "prescription",
+        "Type": "Prescription_and_Doctor_Visit_Management_System.Models.Prescription",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.PrescriptionController",
+    "Method": "EditPrescription",
+    "RelativePath": "api/Prescription/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedPrescription",
+        "Type": "Prescription_and_Doctor_Visit_Management_System.Models.Prescription",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.PrescriptionController",
+    "Method": "DeletePrescription",
+    "RelativePath": "api/Prescription/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.PrescriptionController",
+    "Method": "SearchPrescriptions",
+    "RelativePath": "api/Prescription/search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "prescriptionId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "tc",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.PrescriptionDetailController",
+    "Method": "GetAllPrescriptionDetails",
+    "RelativePath": "api/PrescriptionDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.PrescriptionDetailController",
+    "Method": "CreatePrescriptionDetail",
+    "RelativePath": "api/PrescriptionDetail",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "detail",
+        "Type": "Prescription_and_Doctor_Visit_Management_System.Models.PrescriptionDetail",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.PrescriptionDetailController",
+    "Method": "EditPrescriptionDetail",
+    "RelativePath": "api/PrescriptionDetail/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedDetail",
+        "Type": "Prescription_and_Doctor_Visit_Management_System.Models.PrescriptionDetail",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.PrescriptionDetailController",
+    "Method": "DeletePrescriptionDetail",
+    "RelativePath": "api/PrescriptionDetail/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.SystemController",
+    "Method": "NotifyIncompletePrescriptions",
+    "RelativePath": "api/System/notifications/incomplete-prescriptions",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.VisitController",
+    "Method": "GetAllVisits",
+    "RelativePath": "api/Visit",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.VisitController",
+    "Method": "CreateVisit",
+    "RelativePath": "api/Visit",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "visit",
+        "Type": "Prescription_and_Doctor_Visit_Management_System.Models.Visit",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.VisitController",
+    "Method": "EditVisit",
+    "RelativePath": "api/Visit/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedVisit",
+        "Type": "Prescription_and_Doctor_Visit_Management_System.Models.Visit",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prescription_and_Doctor_Visit_Management_System.Controllers.VisitController",
+    "Method": "DeleteVisit",
+    "RelativePath": "api/Visit/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

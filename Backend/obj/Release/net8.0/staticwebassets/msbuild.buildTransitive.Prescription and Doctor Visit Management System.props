@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Prescription and Doctor Visit Management System.props" />
+</Project>
