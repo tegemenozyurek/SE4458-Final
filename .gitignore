@@ -2,9 +2,14 @@
 Backend/**/bin/
 Backend/**/obj/
 Backend/**/.vs/
-Backend/**/packages/
+Backend/**/Debug/
+Backend/**/Release/
 *.user
 *.suo
+*.cache
+*.dll
+*.exe
+*.pdb
 
 # Python
 __pycache__/
@@ -28,14 +33,22 @@ var/
 .installed.cfg
 *.egg
 .idea/
+.pycharm/
 
-# VSCode
+# VS Code
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-*.code-workspace
+
+# Node modules (if using any JavaScript packages)
+Frontend/node_modules/
+package-lock.json
+
+# Misc
+.DS_Store
+Thumbs.db
 
 # Logs and databases
 *.log
