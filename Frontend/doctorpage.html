@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor - Prescription</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <h1 class="text-center mb-4 text-primary fw-bold">Prescription</h1>
+                        <h5 class="text-center mb-4 text-secondary fw-bold">Create a prescription for your patient</h5>
+
+                        <!-- Doctor Name -->
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Doctor Name:</label>
+                            <p id="doctorName" class="form-control-plaintext">Loading...</p>
+                        </div>
+
+                        <!-- Patient Name -->
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Patient Name:</label>
+                            <p id="patientName" class="form-control-plaintext">Loading...</p>
+                        </div>
+
+                        <!-- Patient TCK -->
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Patient TCK:</label>
+                            <p id="patientTCK" class="form-control-plaintext">Loading...</p>
+                        </div>
+
+                        <!-- Medicine Input -->
+                        <div class="mb-4">
+                            <label for="medicineInput" class="form-label fw-bold">Medicine:</label>
+                            <div class="input-group">
+                                <div class="position-relative w-100">
+                                    <input type="text" 
+                                           id="medicineInput" 
+                                           class="form-control" 
+                                           placeholder="Search medicine"
+                                           autocomplete="off"
+                                           oninput="searchMedicines(this.value)">
+                                    <div id="medicineDropdown" class="dropdown-menu w-100" style="max-height: 200px; overflow-y: auto;">
+                                        <!-- Dropdown items will be inserted here -->
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary" onclick="addMedicine()">Add</button>
+                            </div>
+                        </div>
+
+                        <!-- Added Medicines -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Added Medicines:</label>
+                            <div class="border rounded p-2" style="height: 150px; overflow-y: auto;">
+                                <ul id="medicineList" class="list-group">
+                                    <!-- Medicines will be dynamically added here -->
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="text-center">
+                            <button class="btn btn-success w-100" onclick="submitPrescription()">Submit Prescription</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        // Load doctor and patient information when page loads
+        window.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // Load doctor name
+                const doctorName = localStorage.getItem('doctorName');
+                if (doctorName) {
+                    document.getElementById('doctorName').textContent = doctorName;
+                }
+
+                // Load patient information
+                const patientTC = localStorage.getItem('currentPatientTC');
+                if (patientTC) {
+                    const response = await fetch('https://localhost:7282/api/Patient');
+                    const data = await response.json();
+                    const patients = data.$values;
+                    const currentPatient = patients.find(p => p.tc === patientTC);
+
+                    if (currentPatient) {
+                        document.getElementById('patientName').textContent = currentPatient.name;
+                        document.getElementById('patientTCK').textContent = currentPatient.tc;
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading data:', error);
+            }
+        });
+
+        // Medicine search functionality
+        async function searchMedicines(searchText) {
+            const medicineDropdown = document.getElementById('medicineDropdown');
+            
+            if (!searchText || searchText.length < 2) {
+                medicineDropdown.style.display = 'none';
+                return;
+            }
+
+            try {
+                const response = await fetch(`https://localhost:7282/api/Medicines/search/partial?partialName=${searchText}`);
+                if (!response.ok) throw new Error('Failed to fetch medicines');
+                
+                const data = await response.json();
+                const medicines = data.$values || [];
+                
+                // Clear previous results
+                medicineDropdown.innerHTML = '';
+
+                if (medicines.length > 0) {
+                    medicineDropdown.style.display = 'block';
+                    medicines.forEach(medicine => {
+                        const item = document.createElement('a');
+                        item.className = 'dropdown-item';
+                        item.href = '#';
+                        item.textContent = medicine.name;
+                        item.onclick = (e) => {
+                            e.preventDefault();
+                            document.getElementById('medicineInput').value = medicine.name;
+                            medicineDropdown.style.display = 'none';
+                            addMedicineToList(medicine.name);
+                        };
+                        medicineDropdown.appendChild(item);
+                    });
+                } else {
+                    medicineDropdown.style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Error searching medicines:', error);
+                medicineDropdown.style.display = 'none';
+            }
+        }
+
+        // Add medicine to list
+        function addMedicineToList(medicineName) {
+            const medicineList = document.getElementById('medicineList');
+            const li = document.createElement('li');
+            li.className = 'list-group-item d-flex justify-content-between align-items-center';
+            li.textContent = medicineName;
+            
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'btn btn-danger btn-sm';
+            deleteButton.textContent = 'Delete';
+            deleteButton.onclick = () => li.remove();
+            
+            li.appendChild(deleteButton);
+            medicineList.appendChild(li);
+            
+            // Clear input after adding
+            document.getElementById('medicineInput').value = '';
+        }
+
+        // Add input event listener for medicine search
+        document.getElementById('medicineInput').addEventListener('input', (e) => {
+            searchMedicines(e.target.value.trim());
+        });
+
+        // Submit prescription function
+        async function submitPrescription() {
+            const medicineList = document.getElementById('medicineList');
+            if (medicineList.children.length === 0) {
+                alert('No medicines added to the prescription.');
+                return;
+            }
+
+            try {
+                const patientTC = localStorage.getItem('currentPatientTC');
+                
+                if (!patientTC) {
+                    throw new Error('Missing patient TC');
+                }
+
+                // Fetch patient information to get ID
+                const patientResponse = await fetch('https://localhost:7282/api/Patient');
+                const data = await patientResponse.json();
+                const patients = data.$values;
+                const currentPatient = patients.find(patient => patient.tc === patientTC);
+
+                if (!currentPatient) {
+                    throw new Error('Patient not found');
+                }
+
+                // Create simplified request data
+                const requestData = {
+                    patientID: currentPatient.patientID,
+                    medicines: Array.from(medicineList.children).map(li => 
+                        li.textContent.replace('Delete', '').trim()
+                    )
+                };
+
+                console.log('Debug - Final Request:', requestData);
+
+                const response = await fetch('https://localhost:7282/api/NewPrescriptions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestData)
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('Server response:', errorText);
+                    throw new Error(`Server returned ${response.status}: ${errorText}`);
+                }
+
+                alert('Prescription submitted successfully!');
+                window.location.href = 'doctortckinput.html';
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error submitting prescription: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html>

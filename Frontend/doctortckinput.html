@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor - Patient Verification</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h1 class="text-center mb-4">Patient Verification</h1>
+                        <form id="tcForm" onsubmit="validatePatient(event)">
+                            <div class="mb-3">
+                                <label for="tcInput" class="form-label">TC Identification Number</label>
+                                <input type="text" id="tcInput" class="form-control" required pattern="\d{11}" maxlength="11" placeholder="Enter 11 digits">
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Continue</button>
+                        </form>
+                        <div id="errorMessage" class="text-danger text-center mt-3" style="display: none;">Patient not found. Please check the TC number.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        async function validatePatient(event) {
+            event.preventDefault();
+            const tcInput = document.getElementById('tcInput').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            try {
+                const response = await fetch('https://localhost:7282/api/Patient');
+                if (!response.ok) throw new Error('Network response was not ok');
+                
+                const data = await response.json();
+                // Get the actual patients array from $values
+                const patients = data.$values;
+                
+                console.log('Searching for TC:', tcInput);
+                console.log('Available patients:', patients);
+
+                // Find patient by TC
+                const patient = patients.find(p => p.tc === tcInput);
+                console.log('Found patient:', patient);
+
+                if (patient) {
+                    localStorage.setItem('currentPatientTC', tcInput);
+                    window.location.href = 'doctorpage.html';
+                } else {
+                    errorMessage.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error checking patient. Please try again.');
+            }
+        }
+    </script>
+</body>
+</html>

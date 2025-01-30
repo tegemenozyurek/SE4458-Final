@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Sign in</h1>
+        
+        <div class="d-flex justify-content-center mb-4">
+            <button id="doctorLoginTab" class="btn btn-primary me-2">Doctor</button>
+            <button id="pharmacyLoginTab" class="btn btn-secondary">Pharmacy</button>
+        </div>
+
+        <!-- Doctor Login Form -->
+        <div id="doctorLogin" class="card p-4">
+            <form id="doctorLoginForm" onsubmit="loginDoctor(event)">
+                <div class="mb-3">
+                    <label for="doctorUsername" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="doctorUsername" required>
+                </div>
+                <div class="mb-3">
+                    <label for="doctorPassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="doctorPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Sign in</button>
+            </form>
+            <div class="text-center mt-3">
+                <button class="btn btn-link" onclick="window.location.href='doctorsignup.html'">Create doctor account</button>
+            </div>
+        </div>
+
+        <!-- Pharmacy Login Form -->
+        <div id="pharmacyLogin" class="card p-4 d-none">
+            <form id="pharmacyLoginForm" onsubmit="loginPharmacy(event)">
+                <div class="mb-3">
+                    <label for="pharmacyUsername" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="pharmacyUsername" required>
+                </div>
+                <div class="mb-3">
+                    <label for="pharmacyPassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="pharmacyPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Sign in</button>
+            </form>
+            <div class="text-center mt-3">
+                <button class="btn btn-link" onclick="window.location.href='pharmacysignup.html'">Create pharmacy account</button>
+            </div>
+            <p class="form-control-plaintext" id="pharmacyName">Loading...</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        // Tab switching functionality
+        const doctorTab = document.getElementById('doctorLoginTab');
+        const pharmacyTab = document.getElementById('pharmacyLoginTab');
+        const doctorForm = document.getElementById('doctorLogin');
+        const pharmacyForm = document.getElementById('pharmacyLogin');
+
+        doctorTab.addEventListener('click', () => {
+            doctorTab.classList.add('btn-primary');
+            doctorTab.classList.remove('btn-secondary');
+            pharmacyTab.classList.add('btn-secondary');
+            pharmacyTab.classList.remove('btn-primary');
+            doctorForm.classList.remove('d-none');
+            pharmacyForm.classList.add('d-none');
+        });
+
+        pharmacyTab.addEventListener('click', () => {
+            pharmacyTab.classList.add('btn-primary');
+            pharmacyTab.classList.remove('btn-secondary');
+            doctorTab.classList.add('btn-secondary');
+            doctorTab.classList.remove('btn-primary');
+            pharmacyForm.classList.remove('d-none');
+            doctorForm.classList.add('d-none');
+        });
+
+        // Doctor login functionality
+        async function loginDoctor(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('doctorUsername').value;
+            const password = document.getElementById('doctorPassword').value;
+
+            try {
+                const response = await fetch('https://localhost:7282/api/Doctor/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem('doctorToken', data.token);
+                    localStorage.setItem('doctorName', data.name);
+                    localStorage.setItem('doctorID', data.id);
+                    window.location.href = 'doctortckinput.html';
+                } else {
+                    const error = await response.text();
+                    alert('Login failed: ' + error);
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                alert('Connection error. Please try again.');
+            }
+        }
+
+        // Pharmacy login functionality
+        async function loginPharmacy(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('pharmacyUsername').value;
+            const password = document.getElementById('pharmacyPassword').value;
+
+            try {
+                const response = await fetch('https://localhost:7282/api/Pharmacy/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem('pharmacyID', data.pharmacyID);
+                    localStorage.setItem('pharmacyName', data.name);
+                    window.location.href = 'pharmacytckinput.html';
+                } else {
+                    const error = await response.text();
+                    alert('Login failed: ' + error);
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                alert('Connection error. Please try again.');
+            }
+        }
+    </script>
+</body>
+</html>
